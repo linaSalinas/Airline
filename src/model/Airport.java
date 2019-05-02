@@ -15,7 +15,7 @@ public class Airport {
 	private Random r;
 
 	public Airport(int amount) {
-
+        r = new Random();
 		flights = new ArrayList<Flight>();
 		generateFlights(amount);
 	}
@@ -33,15 +33,13 @@ public class Airport {
 	//__________________________________________________________________________________________________________________________________
 	
 		public void generateNewFlights(int amount) {
-			generateFlights(amount);
+			//generateFlights(amount);
 		}
 	
 	//___________________________________________________________________________________________________________________________________
 	
 		public void generateCode() {
-			
-		    r = new Random();
-		    
+					    
 		    for(int i=0;i<flights.size();i++) {
 		    	flights.get(i).setID(r.nextInt(flights.size()));
 		    }
@@ -59,7 +57,7 @@ public class Airport {
 	
 		public void checkID(int id) {
 			
-			boolean flag = false;
+			boolean flag = false;  
 			int i = 0;
 			while(!flag) {
 				if(id == flights.get(i).getID()) {
@@ -72,7 +70,7 @@ public class Airport {
 
 	public String generateHourRandom() {
 		String hour="";
-		int hours = r.nextInt(12)+1;;
+		int hours = r.nextInt(12)+1;
 		int minut = r.nextInt(60)+1;
 		int second = r.nextInt(60)+1;
 		
@@ -91,26 +89,36 @@ public class Airport {
 		String mssg = "";
 		r = new Random();
 		int year = r.nextInt(2019)+1;
+		
+		if(year < 2019) {
+			year = 2019;
+		}
+		
 		int month = r.nextInt(32)+1;
+		
+		if(month == 0) {
+			month = 1;
+		}
+		
 		int dates = 0;
 
 		if(month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12  ) {
 
-			dates = (int)Math.random()*32;
+			dates = r.nextInt(32);
 
 		}
 		else if(month == 4 || month == 6 || month == 9 || month == 11) {
 
-			dates = (int)Math.random()*31;
+			dates = r.nextInt(31);
 		}
 		else {
-			dates = (int)Math.random()*29;
+			dates = r.nextInt(29);
 		}
 
 		mssg = (year+ "-" + month +"-"+ dates);
 
 		date += mssg;
-
+		
 		return date;
 
 	}
@@ -119,7 +127,7 @@ public class Airport {
 
 	private Airlines generateAirlineRandom() {
 		Airlines airline = null;
-		int airlin = (int)Math.random()*16;
+		int airlin = r.nextInt(16);
 
 		if(airlin == 1) {
 			airline = Airlines.AVIANCA;

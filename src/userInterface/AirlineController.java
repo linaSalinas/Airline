@@ -64,8 +64,8 @@ public class AirlineController {
 
 	@SuppressWarnings("unchecked")
 	public void initializeTableView() {
-		System.out.println("en initializeTableView");
-
+		
+		
 		TABLE = new TableView<Flight>();
 
 		TableColumn<Flight, String> hour = new TableColumn<>("Hour");
@@ -77,18 +77,21 @@ public class AirlineController {
 		TableColumn<Flight, Airlines> airlines = new TableColumn<>("Airlines");
 		airlines.setCellValueFactory(new PropertyValueFactory<>("airline"));
 
-		TableColumn<Flight, String> nFlight = new TableColumn<>("nFlight");
+		TableColumn<Flight, String> nFlight = new TableColumn<>("N_Flight");
 		nFlight.setCellValueFactory(new PropertyValueFactory<>("nFlight"));
 
-		TableColumn<Flight, Citys> dCity = new TableColumn<>("dCity");
+		TableColumn<Flight, Citys> dCity = new TableColumn<>("D_City");
 		dCity.setCellValueFactory(new PropertyValueFactory<>("dCity"));
 
 		TableColumn<Flight, Doors> sDoor = new TableColumn<>("Doors");
 		sDoor.setCellValueFactory(new PropertyValueFactory<>("sDoor"));
 
 		TABLE.getColumns().addAll(hour, date, airlines,nFlight,dCity,sDoor);
+		
+		
 		TABLE.setItems(getFlights());
 		borderpane.setCenter(TABLE);
+		
 	}
 
 	//___________________________________________________________________________________________________________________________________
@@ -116,6 +119,8 @@ public class AirlineController {
     		System.out.println(mssg);
     	}
     }
+	
+	
 
 
 
