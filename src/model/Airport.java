@@ -3,7 +3,6 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.UUID;
 
 import model.Flight.Airlines;
 import model.Flight.Citys;
@@ -12,39 +11,74 @@ import model.Flight.Doors;
 public class Airport {
 
 	private List<Flight> flights;
+	
+	private Random r;
 
-	public Airport() {
+	public Airport(int amount) {
 
 		flights = new ArrayList<Flight>();
-
+		generateFlights(amount);
 	}
-
+	
+	//___________________________________________________________________________________________________________________________________
+	
 	public void generateFlights(int amount) {
-
+		System.out.println("en generateFlights");
 		for(int i = 0; i < amount; i++) {
-			Flight flight = new Flight(generateHourRandom(),generateDateRandom(),generateAirlineRandom(),generateCode(),generateCityRandom(),generateDoors());
+			Flight flight = new Flight(generateHourRandom(),generateDateRandom(),generateAirlineRandom(),generateCityRandom(),generateDoors());
 			flights.add(flight);
 		}
 
 	}
+	//__________________________________________________________________________________________________________________________________
+	
+		public void generateNewFlights(int amount) {
+			generateFlights(amount);
+		}
+	
 	//___________________________________________________________________________________________________________________________________
 	
-	public String generateCode() {
-	    UUID uniqueKey = UUID.randomUUID();
-	   return uniqueKey.toString();
-	  }
+		public void generateCode() {
+			
+		    r = new Random();
+		    
+		    for(int i=0;i<flights.size();i++) {
+		    	flights.get(i).setID(r.nextInt(flights.size()));
+		    }
+		    
+		  }
+	//___________________________________________________________________________________________________________________________________
+	
+		public void checkIDs() {
+			for(int i=0;i<flights.size();i++) {
+				checkID(flights.get(i).getID());
+			}
+		}
+	
+	//___________________________________________________________________________________________________________________________________
+	
+		public void checkID(int id) {
+			
+			boolean flag = false;
+			int i = 0;
+			while(!flag) {
+				if(id == flights.get(i).getID()) {
+					flights.get(i).setID(r.nextInt(flights.size()));
+				}
+			}
+		}
+	
 	//___________________________________________________________________________________________________________________________________
 
 	public String generateHourRandom() {
 		String hour="";
-		String mssg= " ";
-		int hours = (int)Math.random()*13;
-		double minut = Math.random()*61;
-		double second = Math.random()*61;
+		int hours = r.nextInt(12)+1;;
+		int minut = r.nextInt(60)+1;
+		int second = r.nextInt(60)+1;
+		
+		System.out.println(hours + "" + minut + "" + second);
 
-		mssg = (hours+":"+minut+":"+second);
-
-		hour += mssg;
+		hour += (hours+":"+minut+":"+second);
 
 		System.out.println(hour);
 		return hour;
@@ -55,7 +89,7 @@ public class Airport {
 	public String generateDateRandom() {
 		String date = "";
 		String mssg = "";
-		Random r = new Random();
+		r = new Random();
 		int year = r.nextInt(2019)+1;
 		int month = r.nextInt(32)+1;
 		int dates = 0;
@@ -139,7 +173,7 @@ public class Airport {
 
 	public Citys generateCityRandom() {
 		Citys dCity = null;
-		Random r = new Random();
+		r = new Random();
 		int city = r.nextInt(16)+1;
 
 		if(city == 1) {
@@ -196,7 +230,7 @@ public class Airport {
 
 	public Doors generateDoors() {
 		Doors sDoor= null;
-		Random r = new Random();
+		r = new Random();
 		int door = r.nextInt(16)+1;  
 		
 		if(door == 1) {
