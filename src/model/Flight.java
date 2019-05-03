@@ -1,12 +1,14 @@
 package model;
 
+import java.util.List;
+
 public class Flight {
 
 	
 	public enum Airlines{AVIANCA,LAN,AIRFRANCE,AEROMEXICO,AIRCANADA,CONTINENTAL,AEROCIVIL,AVIATUR,TRIVAGO,IBERIA,LATAM,INTERJET,WINGO,SATENA,EASYFLY};
 	private String hour;
 	private String date; 
-	private int id;
+	/*private List<Integer> id;*/
 	private Airlines airline;
 	public enum Citys{CALI,CARTAGENA,MEDELLIN,BUENOS_AIRES,ITALIA,ROMA,BARRANQUILLA,CIUDAD_DE_MEXICO,BOGOTA,MONTEVIDEO,SEUL,PASTO,ACAPULCO,CHACO,TOKIO};
 	private Citys dCity;
@@ -26,15 +28,15 @@ public class Flight {
 	
 	//___________________________________________________________________________________________________________________________________
 	
-	public int getID() {
+	/*public List<Integer> getID() {
 		return id;
-	}
+	}*/
 	
 	//___________________________________________________________________________________________________________________________________
 	
-	public void setID(int nid) {
+	/*public void setID(List<Integer> nid) {
 		id = nid;
-	}
+	}*/
 	
 	//___________________________________________________________________________________________________________________________________
 

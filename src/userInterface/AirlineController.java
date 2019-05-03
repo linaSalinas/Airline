@@ -36,36 +36,51 @@ public class AirlineController {
 	private ComboBox<String> co;
 
 	private Airport airport;
-	
+
 	private Random random;
-	
+
 	private Integer amount;
-	
+
+	@FXML
+	private Button Search;
+
+
+
 	//___________________________________________________________________________________________________________________________________
 
 	@FXML
 	public void initialize() {
-		
+
 		random = new Random();
 		amount = random.nextInt(100);
 		airport = new Airport(amount);
-		//prueba();
 		initializeTableView();
 	}
-	
+
 	//___________________________________________________________________________________________________________________________________
-	
-	  @FXML
-	    void ncor(ActionEvent event) {
-		 
-	    }
+
+	@FXML
+	void ncor(ActionEvent event) {
+		
+		int num = 0;
+		
+		try {
+		
+			num = Integer.parseInt(OCON.getText());
+		}
+		catch (NumberFormatException numberException) {
+			System.err.println(numberException.getMessage());
+		}
+		airport.generateFlights(num);
+		prueba();
+	}
 
 	//___________________________________________________________________________________________________________________________________
 
 	@SuppressWarnings("unchecked")
 	public void initializeTableView() {
-		
-		
+
+
 		TABLE = new TableView<Flight>();
 
 		TableColumn<Flight, String> hour = new TableColumn<>("Hour");
@@ -77,21 +92,20 @@ public class AirlineController {
 		TableColumn<Flight, Airlines> airlines = new TableColumn<>("Airlines");
 		airlines.setCellValueFactory(new PropertyValueFactory<>("airline"));
 
-		TableColumn<Flight, String> nFlight = new TableColumn<>("N_Flight");
-		nFlight.setCellValueFactory(new PropertyValueFactory<>("nFlight"));
-
+		//TableColumn<Flight, String> nFlight = new TableColumn<>("N_Flight");
+		//nFlight.setCellValueFactory(new PropertyValueFactory<>("nFlight"));
+		
 		TableColumn<Flight, Citys> dCity = new TableColumn<>("D_City");
 		dCity.setCellValueFactory(new PropertyValueFactory<>("dCity"));
 
 		TableColumn<Flight, Doors> sDoor = new TableColumn<>("Doors");
 		sDoor.setCellValueFactory(new PropertyValueFactory<>("sDoor"));
 
-		TABLE.getColumns().addAll(hour, date, airlines,nFlight,dCity,sDoor);
-		
-		
+		TABLE.getColumns().addAll(hour, date, airlines, dCity,sDoor);
+
 		TABLE.setItems(getFlights());
 		borderpane.setCenter(TABLE);
-		
+
 	}
 
 	//___________________________________________________________________________________________________________________________________
@@ -108,23 +122,24 @@ public class AirlineController {
 	//___________________________________________________________________________________________________________________________________
 
 	public void prueba() {
-    	String mssg = "";
-    	for(int i=0;i<airport.getFlights().size();i++) {
-    		mssg += airport.getFlights().get(i).getDate() + "-";
-    		mssg += airport.getFlights().get(i).getHour() + "-";
-    		mssg += " " + airport.getFlights().get(i).getAirline() + " -";
-    		mssg += " " + airport.getFlights().get(i).getsDoor() + " -";
-    		mssg += " " + airport.getFlights().get(i).getdCity() + "\n";
-    		
-    		System.out.println(mssg);
-    	}
-    }
+		TABLE.setItems(getFlights());		
+	}
+
+	//___________________________________________________________________________________________________________________________________
+
+	public void readCList() {
+		
+	}
 	
-	
+	//___________________________________________________________________________________________________________________________________
 
 
 
+
+	@FXML
+	void Search(ActionEvent event) {
+
+	}
+	//___________________________________________________________________________________________________________________________________
 
 }
-
-

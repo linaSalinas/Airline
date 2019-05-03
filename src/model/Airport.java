@@ -23,39 +23,47 @@ public class Airport {
 	//___________________________________________________________________________________________________________________________________
 	
 	public void generateFlights(int amount) {
-		System.out.println("en generateFlights");
+
+		
 		for(int i = 0; i < amount; i++) {
 			Flight flight = new Flight(generateHourRandom(),generateDateRandom(),generateAirlineRandom(),generateCityRandom(),generateDoors());
-			flights.add(flight);
+			flights.add(i, flight);
 		}
 
 	}
 	//__________________________________________________________________________________________________________________________________
 	
 		public void generateNewFlights(int amount) {
-			//generateFlights(amount);
+			generateFlights(amount);
 		}
 	
 	//___________________________________________________________________________________________________________________________________
 	
-		public void generateCode() {
+		/*public List<Integer> generateCode(int amount) {
+			
+			List<Integer> numbers = new ArrayList<>(amount);
 					    
-		    for(int i=0;i<flights.size();i++) {
+		    for(int i=0;i<amount;i++) {
 		    	flights.get(i).setID(r.nextInt(flights.size()));
+		    	numbers.add(i);
 		    }
-		    
-		  }
+		    while (numbers.size()>1) {
+		    	int randomIndex = r.nextInt(numbers.size());
+		    	numbers.remove(randomIndex);
+		    }
+		    return numbers;
+		  }*/
 	//___________________________________________________________________________________________________________________________________
 	
-		public void checkIDs() {
+		/*public void checkIDs() {
 			for(int i=0;i<flights.size();i++) {
 				checkID(flights.get(i).getID());
 			}
-		}
+		}*/
 	
 	//___________________________________________________________________________________________________________________________________
 	
-		public void checkID(int id) {
+		/*public void checkID(int id) {
 			
 			boolean flag = false;  
 			int i = 0;
@@ -64,7 +72,7 @@ public class Airport {
 					flights.get(i).setID(r.nextInt(flights.size()));
 				}
 			}
-		}
+		}*/
 	
 	//___________________________________________________________________________________________________________________________________
 
@@ -74,12 +82,9 @@ public class Airport {
 		int minut = r.nextInt(60)+1;
 		int second = r.nextInt(60)+1;
 		
-		System.out.println(hours + "" + minut + "" + second);
-
 		hour += (hours+":"+minut+":"+second);
 
-		System.out.println(hour);
-		return hour;
+			return hour;
 	}
 
 	//___________________________________________________________________________________________________________________________________
@@ -94,7 +99,7 @@ public class Airport {
 			year = 2019;
 		}
 		
-		int month = r.nextInt(32)+1;
+		int month = r.nextInt(12)+1;
 		
 		if(month == 0) {
 			month = 1;
@@ -128,6 +133,10 @@ public class Airport {
 	private Airlines generateAirlineRandom() {
 		Airlines airline = null;
 		int airlin = r.nextInt(16);
+		
+		if(airlin == 0) {
+			airlin = 1;
+		}
 
 		if(airlin == 1) {
 			airline = Airlines.AVIANCA;
@@ -174,6 +183,7 @@ public class Airport {
 		if(airlin == 15) {
 			airline = Airlines.LATAM;
 		}
+		
 		return airline;
 	}
 
@@ -182,7 +192,11 @@ public class Airport {
 	public Citys generateCityRandom() {
 		Citys dCity = null;
 		r = new Random();
-		int city = r.nextInt(16)+1;
+		int city = r.nextInt(16);
+		
+		if(city == 0) {
+			city= 1;
+		}
 
 		if(city == 1) {
 			dCity = Citys.ACAPULCO;
@@ -239,7 +253,11 @@ public class Airport {
 	public Doors generateDoors() {
 		Doors sDoor= null;
 		r = new Random();
-		int door = r.nextInt(16)+1;  
+		int door = r.nextInt(16);  
+		
+		if(door == 0) {
+			door = 1;
+		}
 		
 		if(door == 1) {
 			sDoor = Doors.A;
@@ -286,6 +304,7 @@ public class Airport {
 		if(door == 15) {
 			sDoor = Doors.O;
 		}
+		
 		return sDoor;
 
 	}
