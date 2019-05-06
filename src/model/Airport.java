@@ -1,131 +1,151 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
 import model.Flight.Airlines;
 import model.Flight.Citys;
+import model.Flight.Code;
 import model.Flight.Doors;
 
 public class Airport {
 
 	private List<Flight> flights;
-	
+	private Flight firstFlight;
+	private Hour hours;
 	private Random r;
+	private Date dates;
 
 	public Airport(int amount) {
-        r = new Random();
-		flights = new ArrayList<Flight>();
-		generateFlights(amount);
-	}
-	
-	//___________________________________________________________________________________________________________________________________
-	
-	public void generateFlights(int amount) {
-
-		
-		for(int i = 0; i < amount; i++) {
-			Flight flight = new Flight(generateHourRandom(),generateDateRandom(),generateAirlineRandom(),generateCityRandom(),generateDoors());
-			flights.add(i, flight);
-		}
-
-	}
-	//__________________________________________________________________________________________________________________________________
-	
-		public void generateNewFlights(int amount) {
-			generateFlights(amount);
-		}
-	
-	//___________________________________________________________________________________________________________________________________
-	
-		/*public List<Integer> generateCode(int amount) {
-			
-			List<Integer> numbers = new ArrayList<>(amount);
-					    
-		    for(int i=0;i<amount;i++) {
-		    	flights.get(i).setID(r.nextInt(flights.size()));
-		    	numbers.add(i);
-		    }
-		    while (numbers.size()>1) {
-		    	int randomIndex = r.nextInt(numbers.size());
-		    	numbers.remove(randomIndex);
-		    }
-		    return numbers;
-		  }*/
-	//___________________________________________________________________________________________________________________________________
-	
-		/*public void checkIDs() {
-			for(int i=0;i<flights.size();i++) {
-				checkID(flights.get(i).getID());
-			}
-		}*/
-	
-	//___________________________________________________________________________________________________________________________________
-	
-		/*public void checkID(int id) {
-			
-			boolean flag = false;  
-			int i = 0;
-			while(!flag) {
-				if(id == flights.get(i).getID()) {
-					flights.get(i).setID(r.nextInt(flights.size()));
-				}
-			}
-		}*/
-	
-	//___________________________________________________________________________________________________________________________________
-
-	public String generateHourRandom() {
-		String hour="";
-		int hours = r.nextInt(12)+1;
-		int minut = r.nextInt(60)+1;
-		int second = r.nextInt(60)+1;
-		
-		hour += (hours+":"+minut+":"+second);
-
-			return hour;
-	}
-
-	//___________________________________________________________________________________________________________________________________
-
-	public String generateDateRandom() {
-		String date = "";
-		String mssg = "";
 		r = new Random();
-		int year = r.nextInt(2019)+1;
-		
-		if(year < 2019) {
-			year = 2019;
+		hours = new Hour();
+		dates = new Date();
+		flights = new ArrayList<Flight>();
+
+	}
+
+	//___________________________________________________________________________________________________________________________________
+
+	public List<Flight> getFlightToArray() {
+		List<Flight> flight;
+		flight = new LinkedList<Flight>();
+		Flight current = firstFlight;
+		while(current!=null) {
+			flight.add(current);
+			current = current.getNextFlight();
 		}
-		
-		int month = r.nextInt(12)+1;
-		
-		if(month == 0) {
-			month = 1;
-		}
-		
-		int dates = 0;
+		return flights;
+	}
 
-		if(month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12  ) {
+	//___________________________________________________________________________________________________________________________________
 
-			dates = r.nextInt(32);
+	public void addFlight(String hour, String date,Code id, Airlines airline, Citys dCity, Doors sDoor) {
 
-		}
-		else if(month == 4 || month == 6 || month == 9 || month == 11) {
-
-			dates = r.nextInt(31);
-		}
-		else {
-			dates = r.nextInt(29);
+		Flight flight = new Flight(hours.generateHour(),dates.generateDateRandom(),generateCodeRandom() ,generateAirlineRandom(),generateCityRandom(),generateDoors());
+		if(firstFlight==null) {
+			firstFlight = flight;
+		} else {
+			Flight current = firstFlight;
+			while(current.getNextFlight() != null) {
+				current = current.getNextFlight();
+			}
+			current.setNextFlight(flight);
 		}
 
-		mssg = (year+ "-" + month +"-"+ dates);
+	}
 
-		date += mssg;
-		
-		return date;
+	//__________________________________________________________________________________________________________________________________
 
+	/**public void generateNewFlights(int amount) {
+			generateFlights(amount);
+		}*/
+
+	//___________________________________________________________________________________________________________________________________
+
+	public Code generateCodeRandom() {
+
+		Code id = null;
+		r = new Random();
+		int code = r.nextInt(25)+1;
+
+		if(code == 0) {
+			code= 1;
+		}
+		if(code == 1) {
+			id = Code.A123;
+		}
+		if(code == 2) {
+			id = Code.B134;
+		}
+		if(code == 3) {
+			id = Code.C2345;
+		}
+		if(code == 4) {
+			id = Code.D243;
+		}
+		if(code == 5) {
+			id = Code.E4355;
+		}
+		if(code == 6) {
+			id = Code.F5433 ;
+		}
+		if(code == 7) {
+			id = Code.G3556;
+		}
+		if(code == 9) {
+			id = Code.H4575;
+		}
+		if(code == 10) {
+			id = Code.J4657;
+		}
+		if(code == 11) {
+			id = Code.K5743;
+		}
+		if(code == 12) {
+			id = Code.L3657;
+		}
+		if(code == 13) {
+			id = Code.M754;
+		}
+		if(code == 14) {
+			id = Code.N34657;
+		}
+		if(code == 15) {
+			id = Code.O67864;
+		}
+		if(code == 16) {
+			id = Code.P4633;
+		}
+		if(code == 17) {
+			id = Code.Q3466;
+		}
+		if(code == 18) {
+			id = Code.R3346;
+		}
+		if(code == 19) {
+			id = Code.S098394;
+		}
+		if(code == 20) {
+			id = Code.T24456;
+		}
+		if(code == 21) {
+			id = Code.U57797;
+		}
+		if(code == 22) {
+			id = Code.V07897;
+		}
+		if(code == 23) {
+			id = Code.W67854;
+		}
+		if(code == 24) {
+			id = Code.X5765;
+		}
+		if(code == 25) {
+			id = Code.Z68679;
+		}
+		return id;
 	}
 
 	//___________________________________________________________________________________________________________________________________	
@@ -133,7 +153,7 @@ public class Airport {
 	private Airlines generateAirlineRandom() {
 		Airlines airline = null;
 		int airlin = r.nextInt(16);
-		
+
 		if(airlin == 0) {
 			airlin = 1;
 		}
@@ -183,7 +203,7 @@ public class Airport {
 		if(airlin == 15) {
 			airline = Airlines.LATAM;
 		}
-		
+
 		return airline;
 	}
 
@@ -193,7 +213,7 @@ public class Airport {
 		Citys dCity = null;
 		r = new Random();
 		int city = r.nextInt(16);
-		
+
 		if(city == 0) {
 			city= 1;
 		}
@@ -254,11 +274,11 @@ public class Airport {
 		Doors sDoor= null;
 		r = new Random();
 		int door = r.nextInt(16);  
-		
+
 		if(door == 0) {
 			door = 1;
 		}
-		
+
 		if(door == 1) {
 			sDoor = Doors.A;
 		}
@@ -304,17 +324,30 @@ public class Airport {
 		if(door == 15) {
 			sDoor = Doors.O;
 		}
-		
+
 		return sDoor;
 
 	}
-	
-	
+
+
 	//___________________________________________________________________________________________________________________________________
-	
+
 	public ArrayList<Flight> getFlights(){
 		return (ArrayList<Flight>) flights;
 	}
+	
+	//___________________________________________________________________________________________________________________________________
+
+	public Flight getFirstFlight() {
+		return firstFlight;
+	}
+	
+	//___________________________________________________________________________________________________________________________________
+
+	public void setFirstFlight(Flight firstFlight) {
+		this.firstFlight = firstFlight;
+	}
+	
 	//___________________________________________________________________________________________________________________________________
 
 

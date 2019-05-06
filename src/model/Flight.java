@@ -1,6 +1,6 @@
 package model;
 
-import java.util.List;
+
 
 public class Flight {
 
@@ -8,35 +8,38 @@ public class Flight {
 	public enum Airlines{AVIANCA,LAN,AIRFRANCE,AEROMEXICO,AIRCANADA,CONTINENTAL,AEROCIVIL,AVIATUR,TRIVAGO,IBERIA,LATAM,INTERJET,WINGO,SATENA,EASYFLY};
 	private String hour;
 	private String date; 
-	/*private List<Integer> id;*/
+	private Code id;
+	public enum Code{A123,B134,C2345,D243,E4355,F5433,G3556,H4575,Y5765,J4657,K5743,L3657,M754,N34657,O67864,P4633,Q3466,R3346,S098394,T24456,U57797,V07897,W67854,X5765,Z68679};
 	private Airlines airline;
 	public enum Citys{CALI,CARTAGENA,MEDELLIN,BUENOS_AIRES,ITALIA,ROMA,BARRANQUILLA,CIUDAD_DE_MEXICO,BOGOTA,MONTEVIDEO,SEUL,PASTO,ACAPULCO,CHACO,TOKIO};
 	private Citys dCity;
 	public enum Doors{A,B,C,D,E,F,G,H,I,J,K,L,M,N,O};
 	private Doors sDoor;
+	private Flight nextFlight;
 	
 	//___________________________________________________________________________________________________________________________________
 
-	public Flight(String hour, String date, Airlines airline, Citys dCity, Doors sDoor) {
+	public Flight(String hour, String date,Code id, Airlines airline, Citys dCity, Doors sDoor) {
 
 		this.hour = hour;
 		this.date = date;
 		this.airline = airline;
+		this.id = id;
 		this.dCity = dCity;
 		this.sDoor = sDoor;
 	}
 	
 	//___________________________________________________________________________________________________________________________________
 	
-	/*public List<Integer> getID() {
+	public Code getID() {
 		return id;
-	}*/
+	}
 	
 	//___________________________________________________________________________________________________________________________________
 	
-	/*public void setID(List<Integer> nid) {
+	public void setID(Code nid) {
 		id = nid;
-	}*/
+	}
 	
 	//___________________________________________________________________________________________________________________________________
 
@@ -97,6 +100,19 @@ public class Flight {
 	public void setsDoor(Doors sDoor) {
 		this.sDoor = sDoor;
 	}
+	
+	//___________________________________________________________________________________________________________________________________
+	
+	public Flight getNextFlight(){
+		return nextFlight;	
+	}
+	
+	//___________________________________________________________________________________________________________________________________
 
+	public void setNextFlight(Flight nextFlight) {
+		this.nextFlight = nextFlight;
+	}
+	
+	//___________________________________________________________________________________________________________________________________
 
 }

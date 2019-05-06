@@ -27,13 +27,19 @@ public class AirlineController {
 	private ObservableList<Flight> flights;
 
 	@FXML
-	private TextField OCON;
+	private TextField txtNVuelos;
 
 	@FXML
 	private Button start;
 
 	@FXML
-	private ComboBox<String> co;
+	private ComboBox<String> Sort;
+
+	@FXML
+	private ComboBox<?> SearchF;
+	
+	@FXML
+	private Button Search;
 
 	private Airport airport;
 
@@ -41,9 +47,7 @@ public class AirlineController {
 
 	private Integer amount;
 
-	@FXML
-	private Button Search;
-
+	
 
 
 	//___________________________________________________________________________________________________________________________________
@@ -60,18 +64,18 @@ public class AirlineController {
 	//___________________________________________________________________________________________________________________________________
 
 	@FXML
-	void ncor(ActionEvent event) {
-		
+	void start(ActionEvent event) {
+
 		int num = 0;
-		
+
 		try {
-		
-			num = Integer.parseInt(OCON.getText());
+
+			num = Integer.parseInt(txtNVuelos.getText());
 		}
 		catch (NumberFormatException numberException) {
 			System.err.println(numberException.getMessage());
 		}
-		airport.generateFlights(num);
+		//airport.generateFlights(num);
 		prueba();
 	}
 
@@ -92,16 +96,16 @@ public class AirlineController {
 		TableColumn<Flight, Airlines> airlines = new TableColumn<>("Airlines");
 		airlines.setCellValueFactory(new PropertyValueFactory<>("airline"));
 
-		//TableColumn<Flight, String> nFlight = new TableColumn<>("N_Flight");
-		//nFlight.setCellValueFactory(new PropertyValueFactory<>("nFlight"));
-		
+		TableColumn<Flight, Code> id = new TableColumn<>("N_Flight");
+		id.setCellValueFactory(new PropertyValueFactory<>("id"));
+
 		TableColumn<Flight, Citys> dCity = new TableColumn<>("D_City");
 		dCity.setCellValueFactory(new PropertyValueFactory<>("dCity"));
 
 		TableColumn<Flight, Doors> sDoor = new TableColumn<>("Doors");
 		sDoor.setCellValueFactory(new PropertyValueFactory<>("sDoor"));
 
-		TABLE.getColumns().addAll(hour, date, airlines, dCity,sDoor);
+		TABLE.getColumns().addAll(hour, date, airlines,id, dCity,sDoor);
 
 		TABLE.setItems(getFlights());
 		borderpane.setCenter(TABLE);
@@ -128,9 +132,9 @@ public class AirlineController {
 	//___________________________________________________________________________________________________________________________________
 
 	public void readCList() {
-		
+
 	}
-	
+
 	//___________________________________________________________________________________________________________________________________
 
 
