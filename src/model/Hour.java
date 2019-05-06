@@ -4,6 +4,10 @@ import java.util.Random;
 
 public class Hour {
 	
+	public Hour() {
+	
+	}
+
 	private Random r;
 
 	private static final String AM = "AM";

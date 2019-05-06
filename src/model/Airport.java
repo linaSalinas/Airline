@@ -23,12 +23,17 @@ public class Airport {
 		hours = new Hour();
 		dates = new Date();
 		flights = new ArrayList<Flight>();
+		firstFlight = null;
+
+		for (int i=0; i<amount; i++) {
+			addFlight();
+		}
 
 	}
 
 	//___________________________________________________________________________________________________________________________________
 
-	public List<Flight> getFlightToArray() {
+	public List<Flight> getFightToArray() {
 		List<Flight> flight;
 		flight = new LinkedList<Flight>();
 		Flight current = firstFlight;
@@ -41,7 +46,7 @@ public class Airport {
 
 	//___________________________________________________________________________________________________________________________________
 
-	public void addFlight(String hour, String date,Code id, Airlines airline, Citys dCity, Doors sDoor) {
+	public void addFlight() {
 
 		Flight flight = new Flight(hours.generateHour(),dates.generateDateRandom(),generateCodeRandom() ,generateAirlineRandom(),generateCityRandom(),generateDoors());
 		if(firstFlight==null) {
@@ -53,14 +58,15 @@ public class Airport {
 			}
 			current.setNextFlight(flight);
 		}
+		System.out.println(flight.getdCity());
 
 	}
 
 	//__________________________________________________________________________________________________________________________________
 
-	/**public void generateNewFlights(int amount) {
-			generateFlights(amount);
-		}*/
+	public void generateNewFlights(int amount) {
+		addFlight();
+	}
 
 	//___________________________________________________________________________________________________________________________________
 
@@ -335,20 +341,25 @@ public class Airport {
 	public ArrayList<Flight> getFlights(){
 		return (ArrayList<Flight>) flights;
 	}
-	
 	//___________________________________________________________________________________________________________________________________
+
+	public int recorrerList() {
+		int i = 0;
+		if(firstFlight != null) {
+			Flight aux = firstFlight;
+			while(aux.getNextFlight() == null) {
+				aux = aux.getNextFlight();
+				i ++;
+			}
+		} 
+		return i;
+	}
 
 	public Flight getFirstFlight() {
 		return firstFlight;
 	}
-	
-	//___________________________________________________________________________________________________________________________________
 
 	public void setFirstFlight(Flight firstFlight) {
 		this.firstFlight = firstFlight;
 	}
-	
-	//___________________________________________________________________________________________________________________________________
-
-
 }

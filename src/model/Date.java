@@ -4,6 +4,10 @@ import java.util.Random;
 
 public class Date {
 	
+	public Date() {
+		
+	}
+
 	private Random r;
 	
 	public String generateDateRandom() {

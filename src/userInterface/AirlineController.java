@@ -59,6 +59,7 @@ public class AirlineController {
 		amount = random.nextInt(100);
 		airport = new Airport(amount);
 		initializeTableView();
+		System.out.println("aleatorios "+amount);
 	}
 
 	//___________________________________________________________________________________________________________________________________
@@ -75,7 +76,7 @@ public class AirlineController {
 		catch (NumberFormatException numberException) {
 			System.err.println(numberException.getMessage());
 		}
-		//airport.generateFlights(num);
+		airport.generateNewFlights(num);
 		prueba();
 	}
 
@@ -117,11 +118,16 @@ public class AirlineController {
 	public ObservableList<Flight> getFlights(){
 		System.out.println("en getFlights");
 		flights = FXCollections.observableArrayList();
-		System.out.println(airport.getFlights().size());
-		for(int i=0;i<airport.getFlights().size();i++){
-			flights.add(airport.getFlights().get(i));
-		} 	
+		System.out.println(airport.getFlights());
+		
+		
+		Flight c = airport.getFirstFlight();
+		while(c.getNextFlight() != null) {
+			flights.add(c);
+			c = c.getNextFlight();
+		}
 		return flights;
+	
 	}
 	//___________________________________________________________________________________________________________________________________
 
