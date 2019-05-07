@@ -16,6 +16,8 @@ import model.Flight;
 import model.Flight.*;
 import java.util.Random;
 
+import Searching.Lineal;
+
 public class AirlineController {
 
 	private TableView<Flight> TABLE;   
@@ -37,7 +39,7 @@ public class AirlineController {
 
 	@FXML
 	private ComboBox<?> SearchF;
-	
+
 	@FXML
 	private Button Search;
 
@@ -47,8 +49,7 @@ public class AirlineController {
 
 	private Integer amount;
 
-	
-
+	private Lineal lineal;
 
 	//___________________________________________________________________________________________________________________________________
 
@@ -65,7 +66,7 @@ public class AirlineController {
 	//___________________________________________________________________________________________________________________________________
 
 	@FXML
-	void start(ActionEvent event) {
+	public void start(ActionEvent event) {
 
 		int num = 0;
 
@@ -77,7 +78,7 @@ public class AirlineController {
 			System.err.println(numberException.getMessage());
 		}
 		airport.generateNewFlights(num);
-		prueba();
+		modifyItems();
 	}
 
 	//___________________________________________________________________________________________________________________________________
@@ -119,27 +120,40 @@ public class AirlineController {
 		System.out.println("en getFlights");
 		flights = FXCollections.observableArrayList();
 		System.out.println(airport.getFlights());
-		
-		
+
+
 		Flight c = airport.getFirstFlight();
 		while(c.getNextFlight() != null) {
 			flights.add(c);
 			c = c.getNextFlight();
 		}
 		return flights;
-	
+
 	}
 	//___________________________________________________________________________________________________________________________________
 
-	public void prueba() {
+	public void modifyItems() {
 		TABLE.setItems(getFlights());		
 	}
 
 	//___________________________________________________________________________________________________________________________________
 
-	public void readCList() {
+	/*public void search() throws NullPointerException {
 
-	}
+		String opcion = Sort.getSelectionModel().getSelectedItem();
+
+		try {
+			if(opcion.equals("Date")) {
+
+				lineal.searchDate(null, null);
+
+			}
+		}
+		catch {
+
+		}
+
+	}*/
 
 	//___________________________________________________________________________________________________________________________________
 
@@ -147,7 +161,7 @@ public class AirlineController {
 
 
 	@FXML
-	void Search(ActionEvent event) {
+	public void Search(ActionEvent event) {
 
 	}
 	//___________________________________________________________________________________________________________________________________
